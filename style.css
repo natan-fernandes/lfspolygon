@@ -42,6 +42,14 @@ input {
     /*min-width:100px;*/
     /*background-color:#fff;*/
 }
+#work3 {
+    position: fixed;
+    top: 0px;
+    right: 0;
+    height: 50px;
+    /*min-width:100px;*/
+    /*background-color:#fff;*/
+}
 #canvas {
     /*overflow:hidden;*/
     position: absolute;
@@ -53,8 +61,8 @@ input {
 .output {
     min-height: 150px;
     max-height: 100%;
-    min-width: 350px;
-    max-width: 350px;
+    min-width: 150px;
+    max-width: 150px;
     opacity: 0.3;
 }
 

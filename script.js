@@ -123,8 +123,8 @@ function getMouseXY(e) {
     }
 
     $('.mouse_helper').css({
-        left: (mouseX + 15) + 'px',
-        top: (mouseY + 15) + 'px'
+        left: (mouseX - 35) + 'px',
+        top: (mouseY + 30) + 'px'
     }).text('X: ' + (mouseX - 1280) + ' Y: ' + (1280 - mouseY));
 
     // mouseX = mouseX - canvasDiv.offsetLeft;
@@ -297,6 +297,9 @@ function clearCanvas() {
 
 function Export() {
     var data = [];
+    var track = $('#current-track').find('option:selected').text() + "1X";
+    var sqlQuery = "INSERT INTO roads (track, name, x , y, speedLimit) VALUES ";
+    var aux = false;
 
     for (i in layers) {
         if (layers.hasOwnProperty(i)) {
@@ -309,11 +312,25 @@ function Export() {
                 row.X.push(layers[i].circles[j].center.x - 1280);
                 row.Y.push(1280 - layers[i].circles[j].center.y);
             }
+
             data.push(row);
+
+            sqlQuery += "(" +
+                "'" + track + "', " +
+                "'" + row.name + "', " +
+                "{" + row.X + "}, " +
+                "{" + row.Y + "}, " +
+                row.speedLimit +
+            "), ";
         }
     }
-
-    $('#txt').val(JSON.stringify(data, null, 4));
+    sqlQuery = sqlQuery.slice(0, -2);
+    sqlQuery += ";";
+    
+    $('#txt').val("");
+    $('#txt').val(sqlQuery);
+    
+    //$('#txt').val(JSON.stringify(data, null, 4));
 }
 
 function getEditType() {
